@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant theme-light (html[data-theme="light"] &);
+
 :root {
   /* Brand */
   --brand-primary: #009cc2;
