@@ -1,0 +1,291 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "news": "News",
+    "blog": "Blog",
+    "results": "Lab Results",
+    "contact": "Contact",
+    "bookAppointment": "Book Appointment",
+    "language": "Language"
+  },
+  "topbar": {
+    "systemOnline": "SYSTEM: ONLINE",
+    "tel": "TEL",
+    "cell": "CELL",
+    "emergency": "EMERGENCY",
+    "labHours": "LAB HOURS"
+  },
+  "hero": {
+    "badge": "ACCREDITED BY CAP & ISO",
+    "badgeTitle": "AL-METWALI CLINICAL LABORATORY",
+    "badgeIso": "ISO 9001 CERTIFIED",
+    "kicker": "CLINICAL LABORATORY",
+    "title": "Your Trusted",
+    "titleAccent": "Precision",
+    "titleEnd": "Pathology Lab.",
+    "subtitle": "Advancing the science of diagnosis with ultra-clinical precision. Experience a new standard of medical excellence through our world-class laboratory ecosystem.",
+    "ctaBook": "BOOK APPOINTMENT",
+    "ctaServices": "VIEW SERVICES",
+    "ctaResults": "Lab Results",
+    "ctaBranches": "Our Branches",
+    "imageAlt": "Laboratory equipment",
+    "imageCardTitle": "Accredited operations",
+    "imageCardSubtitle": "Quality-managed diagnostics you can rely on",
+    "stat1Value": "99.9%",
+    "stat1Label": "ACCURACY RATE",
+    "stat2Value": "24h",
+    "stat2Label": "TURNAROUND",
+    "trustStrip": {
+      "established": { "value": "1996+", "label": "Years of service" },
+      "quality": { "value": "ISO 9001", "label": "Certified quality" },
+      "access": { "value": "Network", "label": "Branches & access" }
+    }
+  },
+  "home": {
+    "results": {
+      "kicker": "LAB RESULTS",
+      "title": "Get Your Results",
+      "body": "This section will be connected to your results portal. For now, it's a placeholder matching the landing page theme.",
+      "cta": "Request Help"
+    }
+  },
+  "about": {
+    "kicker": "WELCOME",
+    "title": "Metwali Clinical",
+    "titleAccent": "Laboratory",
+    "body": "Our patient services are distinguished by care, clinical precision, and speed. We ensure accurate results through state-of-the-art automated equipment and a highly skilled medical team dedicated to your health and peace of mind.",
+    "cards": {
+      "precision": {
+        "title": "Precision",
+        "body": "Advanced automated systems for error-free results and rigorous quality control."
+      },
+      "speed": {
+        "title": "Speed",
+        "body": "Real-time processing and rapid reporting for urgent clinical needs."
+      }
+    },
+    "imageAlt": "Molecular structure"
+  },
+  "footer": {
+    "description": "Metwali Clinical Laboratory provides accurate medical analysis with modern automated equipment and a dedicated medical team.",
+    "addressTitle": "Address",
+    "addressBody": "Syria - Damascus - Jisr Al-Abyad - Nasib Al-Bakri Street",
+    "contactTitle": "Contact",
+    "landline": "Landline",
+    "mobile": "Mobile",
+    "rights": "All rights reserved.",
+    "poweredBy": "Powered By: joory.me (2026)"
+  },
+  "labs": {
+    "hero": {
+      "title": "Need a test?",
+      "body": "Book an appointment, we'll conduct a test, and get you your results.",
+      "ctaStart": "Get started",
+      "ctaForms": "View forms",
+      "privacy": "We care about your privacy; view our T's and C's.",
+      "imageAlt": "Need a test section"
+    },
+    "viewLabs": {
+      "kicker": "LABS",
+      "title": "View our labs",
+      "cta": "VIEW LABS",
+      "imageAlt": "View our labs"
+    },
+    "locations": {
+      "kicker": "Locate us",
+      "title": "Our locations",
+      "body": "Come visit our friendly team at one of our laboratories.",
+      "viewMap": "View Map",
+      "openMaps": "Open in Maps",
+      "mapAlt": "Locations map",
+      "items": [
+        {
+          "name": "Metwali Labs — Jisr Al-Abyad",
+          "address": "Syria - Damascus - Jisr Al-Abyad - Nasib Al-Bakri Street"
+        },
+        {
+          "name": "Metwali Labs — Midan Corniche",
+          "address": "Syria - Damascus - Midan Corniche - Next to Al-Majed Mosque"
+        }
+      ]
+    }
+  }
+  ,
+  "stacked": {
+    "title": "Need a test?",
+    "subtitle": "Book an appointment, we'll conduct a test, and get you your results!",
+    "primaryCta": "View forms",
+    "secondaryCta": "Get started",
+    "privacyNote": "We care about your privacy, view our T's and C's."
+  },
+  "mission": {
+    "cards": [
+      {
+        "title": "Our Mission",
+        "body": "To provide reliable, efficient, and accurate laboratory services in a timely manner and at a reasonable cost through advanced modern equipment and highly skilled staff."
+      },
+      {
+        "title": "Our Vision",
+        "body": "To maintain the highest international standards for laboratory services and work quality, ensuring accuracy in clinical results and promoting health awareness in the region."
+      },
+      {
+        "title": "Our Message",
+        "body": "We believe diagnostic accuracy and speed contribute to the correct treatment of disease. We strive to be the first choice for medical diagnostics through the latest technology and top-tier clinical expertise."
+      }
+    ]
+  },
+  "services": {
+    "kicker": "WHAT WE OFFER",
+    "title": "Laboratory Services",
+    "subtitle": "Our disciplines merge technical mastery with a refined scientific approach, delivering insights that redefine what's possible.",
+    "card1": {
+      "badge": "Unrivaled Synthesis Modules",
+      "title": "Research Protocols",
+      "body": "Pioneering molecular synthesis techniques that accelerate the journey from hypothesis to clinical validation.",
+      "tags": ["GENOMICS", "PROTEOMICS", "IMMUNOASSAYS"]
+    },
+    "card2": {
+      "title": "Clinical Diagnostics",
+      "body": "High-fidelity data acquisition for precision instrumentation.",
+      "bullets": [
+        "ISO Certified Procedures",
+        "Real-Time Data Streams",
+        "Advanced Biomarker Panels"
+      ],
+      "cta": "Request Analysis"
+    },
+    "card3": {
+      "title": "The Global Network",
+      "body": "Our instruments are connected across continents, enabling secure insights and diagnostic breakthroughs through an ISO-certified backbone.",
+      "stats": {
+        "uptime": "Global Uptime",
+        "latency": "Max Latency"
+      },
+      "imageAlt": "Connected global network"
+    }
+  },
+  "blog": {
+    "kicker": "BLOG",
+    "title": "Articles & health insights",
+    "subtitle": "Trusted updates on screening, diagnostics, and laboratory quality — curated for patients and clinicians.",
+    "backToHome": "Back to home",
+    "imagePlaceholderAlt": "Article cover placeholder",
+    "readArticle": "Read article",
+    "featured": "Featured",
+    "moreArticles": "More articles",
+    "articleCount": "{count} articles",
+    "backToBlog": "Back to blog",
+    "originalSource": "Original source",
+    "viewAll": "View all articles"
+  },
+  "news": {
+    "kicker": "NEWS & UPDATES",
+    "title": "Latest Medical Insights",
+    "viewAll": "VIEW ALL ARTICLES",
+    "readArticle": "Read Article",
+    "articles": [
+      {
+        "category": "MEDICAL NEWS",
+        "title": "Understanding the importance of regular health screening."
+      },
+      {
+        "category": "TECHNOLOGY",
+        "title": "Latest global advancements in molecular diagnostic instruments."
+      },
+      {
+        "category": "VACCINATION",
+        "title": "Global health updates and new protocol implementations."
+      }
+    ]
+  },
+  "branches": {
+    "kicker": "OUR LOCATIONS",
+    "title": "Our Branches",
+    "getDirections": "Get Directions",
+    "map": {
+      "loading": "Loading map…",
+      "unavailable": "Map unavailable"
+    },
+    "items": [
+      {
+        "name": "Branch 1: Jisr Al-Abyad",
+        "address": "Syria - Damascus - Jisr Al-Abyad - Nasib Al-Bakri Street"
+      },
+      {
+        "name": "Branch 2: Midan Corniche",
+        "address": "Syria - Damascus - Midan Corniche - Next to Al-Majed Mosque"
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "CONTACT",
+    "title": "Book Appointment",
+    "subtitle": "Your health matters. Send your details and we'll confirm your visit as soon as possible.",
+    "infoTitle": "Contact info",
+    "landline": "Landline",
+    "mobile": "Mobile",
+    "emergency": "Emergency",
+    "address": "Address: Syria - Damascus - Jisr Al-Abyad - Nasib Al-Bakri Street",
+    "form": {
+      "nameLabel": "Name *",
+      "namePlaceholder": "Your name",
+      "phoneLabel": "Phone *",
+      "phonePlaceholder": "Your phone number",
+      "dateLabel": "Visit date *",
+      "detailsLabel": "Details",
+      "detailsPlaceholder": "Case details (optional)",
+      "submit": "Submit Request",
+      "note": "This form is currently for design/demo purposes. We can connect it to email, WhatsApp, or a backend API when you're ready."
+    }
+  },
+  "iso": {
+    "ariaLabel": "ISO certification",
+    "indicators": "Slide indicators",
+    "goToSlide": "Go to slide {index}",
+    "badges": [
+      { "subtitle": "Quality Management" },
+      { "subtitle": "Certification Body" }
+    ],
+    "slides": [
+      {
+        "eyebrow": "ISO 9001:2015 Certification · Accredited",
+        "title": "The first and only lab in Syria",
+        "subtitle": "Holds ISO 9001:2015 certification accredited by the UK.",
+        "highlights": [
+          { "k": "Test accuracy", "v": "Documented quality standards" },
+          { "k": "Fast turnaround", "v": "Optimized workflows" },
+          { "k": "Sample safety", "v": "Full traceability" }
+        ],
+        "imageSrc": "/images/isoBanner1.jpg",
+        "imageAlt": "Modern medical laboratory"
+      },
+      {
+        "eyebrow": "Total Quality Management",
+        "title": "Consistent quality at every step",
+        "subtitle": "From sample reception to result delivery — with clear procedures and regular review.",
+        "highlights": [
+          { "k": "Internal review", "v": "Continuous improvement" },
+          { "k": "Audit", "v": "Standards compliance" },
+          { "k": "Documentation", "v": "Traceable record" }
+        ],
+        "imageSrc": "/images/isoBanner2.jpg",
+        "imageAlt": "Laboratory team at work"
+      },
+      {
+        "eyebrow": "Certification authority",
+        "title": "Internationally trusted accreditation",
+        "subtitle": "A recognized certification body to ensure management and quality systems meet the standard.",
+        "highlights": [
+          { "k": "Accreditation", "v": "Evidence-based" },
+          { "k": "Assessment", "v": "Clear metrics" },
+          { "k": "Trust", "v": "Higher transparency" }
+        ],
+        "imageSrc": "/images/isoBanner3.jpg",
+        "imageAlt": "Laboratory analysis equipment"
+      }
+    ]
+  }
+}
+
