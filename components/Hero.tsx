@@ -8,6 +8,20 @@ export function Hero() {
       id="home"
       className="relative flex min-h-screen items-center overflow-hidden bg-[var(--bg-0)]"
     >
+      {/* Background video */}
+      <video
+        className="hero-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/images/hero1.mp4" type="video/mp4" />
+      </video>
+      <div className="hero-video__scrim" aria-hidden="true" />
+
       {/* Ambient glow layers — softer in light mode */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -left-40 top-0 h-[700px] w-[700px] rounded-full bg-[#009cc2]/10 blur-[130px] theme-light:bg-[#009cc2]/[0.07] theme-light:blur-[100px]" />
@@ -84,28 +98,53 @@ export function Hero() {
 
           {/* ── RIGHT: Glowing orb graphic ── */}
           <div className="relative flex items-center justify-center">
-            <div className="relative h-[420px] w-[420px] sm:h-[480px] sm:w-[480px]">
+            <div className="relative h-[420px] w-[420px] sm:h-[480px] sm:w-[480px] orbital med-hover">
 
               {/* Outermost faint ring */}
-              <div className="absolute inset-0 rounded-full border border-[#009cc2]/10 theme-light:border-[#009cc2]/22" />
+              <div className="orbital-ring orbital-ring--outer border border-[#009cc2]/10 theme-light:border-[#009cc2]/22" />
+
+              {/* Analytical lab HUD (appears on hover) */}
+              <div className="lab-hud" aria-hidden>
+                <div className="lab-hud__reticle" />
+                <div className="lab-hud__scanline" />
+                <div className="lab-hud__readout lab-hud__readout--tl">
+                  <div className="lab-hud__k">QC</div>
+                  <div className="lab-hud__v">OK</div>
+                </div>
+                <div className="lab-hud__readout lab-hud__readout--tr">
+                  <div className="lab-hud__k">ANALYSIS</div>
+                  <div className="lab-hud__v">RUNNING</div>
+                </div>
+                <div className="lab-hud__readout lab-hud__readout--bl">
+                  <div className="lab-hud__k">SAMPLE</div>
+                  <div className="lab-hud__v">A-17</div>
+                </div>
+                <div className="lab-hud__readout lab-hud__readout--br">
+                  <div className="lab-hud__k">CONF.</div>
+                  <div className="lab-hud__v">99.9%</div>
+                </div>
+              </div>
+
+              {/* Chemical reaction vibe (field + bubbles + sparks) */}
+              <div className="reaction-field" />
+              <div className="reaction-bubbles">
+                <span className="reaction-bubble" style={{ "--x": "34%", "--s": "10px", "--d": "4.6s", "--delay": "-0.8s" } as React.CSSProperties} />
+                <span className="reaction-bubble" style={{ "--x": "46%", "--s": "14px", "--d": "5.2s", "--delay": "-2.4s" } as React.CSSProperties} />
+                <span className="reaction-bubble" style={{ "--x": "58%", "--s": "9px", "--d": "4.1s", "--delay": "-1.6s" } as React.CSSProperties} />
+                <span className="reaction-bubble" style={{ "--x": "67%", "--s": "12px", "--d": "5.8s", "--delay": "-3.1s" } as React.CSSProperties} />
+                <span className="reaction-bubble" style={{ "--x": "39%", "--s": "8px", "--d": "3.9s", "--delay": "-2.0s" } as React.CSSProperties} />
+                <span className="reaction-bubble" style={{ "--x": "52%", "--s": "11px", "--d": "4.9s", "--delay": "-0.2s" } as React.CSSProperties} />
+              </div>
+              <div className="reaction-sparks" />
 
               {/* Rotating dashed ring */}
-              <div
-                className="absolute inset-6 rounded-full border border-[#009cc2]/20 theme-light:border-[#009cc2]/30"
-                style={{
-                  animation: "spin 25s linear infinite",
-                  borderStyle: "dashed",
-                }}
-              />
+              <div className="orbital-ring orbital-ring--dash inset-6 border border-[#009cc2]/20 theme-light:border-[#009cc2]/30 [border-style:dashed]" />
 
               {/* Second static ring */}
               <div className="absolute inset-12 rounded-full border border-[#009cc2]/30 theme-light:border-[#009cc2]/40" />
 
               {/* Third ring with tick marks simulation */}
-              <div
-                className="absolute inset-20 rounded-full border border-[#009cc2]/40 theme-light:border-[#009cc2]/50"
-                style={{ animation: "spin 18s linear infinite reverse" }}
-              />
+              <div className="orbital-ring orbital-ring--mid inset-20 border border-[#009cc2]/40 theme-light:border-[#009cc2]/50" />
 
               {/* Inner glow disc */}
               <div className="absolute inset-28 rounded-full bg-[#009cc2]/10 backdrop-blur-sm theme-light:bg-[#009cc2]/[0.08]" />
@@ -125,11 +164,13 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Orbiting dot top */}
-              <div
-                className="absolute left-1/2 top-3 h-2 w-2 -translate-x-1/2 rounded-full bg-[#009cc2] shadow-[0_0_10px_#009cc2,0_0_20px_#009cc2] theme-light:shadow-[0_0_8px_rgba(0,156,194,0.35)]"
-                style={{ animation: "spin 8s linear infinite" }}
-              />
+              {/* Orbiting electron */}
+              <div className="orbital-orbit">
+                <div className="orbital-electron theme-light:shadow-[0_0_8px_rgba(0,156,194,0.35)]" />
+              </div>
+              <div className="orbital-orbit orbital-orbit--slow">
+                <div className="orbital-electron theme-light:shadow-[0_0_8px_rgba(0,156,194,0.35)] opacity-70 scale-90" />
+              </div>
 
               {/* Stats card pinned to bottom */}
               <div className="absolute -bottom-6 left-1/2 flex min-w-[260px] -translate-x-1/2 overflow-hidden rounded-lg border border-[var(--border-0)] bg-[var(--surface-0)] backdrop-blur-md theme-light:shadow-[var(--shadow-soft)]">
