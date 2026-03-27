@@ -36,7 +36,7 @@ export function StackedImagesSection({
   const resolvedPrivacyNote = privacyNote ?? t("stacked.privacyNote");
 
   return (
-    <section id={id} className="relative">
+    <section id={id} className="relative" data-reveal="fade-up">
       <div className="mx-auto max-w-6xl px-6 py-14 lg:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
@@ -71,67 +71,67 @@ export function StackedImagesSection({
             </p>
           </div>
 
-          <div className="relative">
+          <div className="relative collage-stage">
             <div className="pointer-events-none absolute -inset-6 rounded-[34px] bg-linear-to-br from-black/8 via-black/0 to-black/10 blur-2xl" />
 
             <div className="relative mx-auto max-w-[520px]">
               <div className="grid grid-cols-12 gap-4 auto-rows-[56px] sm:auto-rows-[64px]">
                 {/* Top-left (smaller) */}
-                <div className="col-start-2 col-span-5 row-start-2 row-span-3 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)]">
+                <div className="col-start-2 col-span-5 row-start-2 row-span-3 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)] collage-tile collage-drift-1 hover-glow">
                   <div className="relative h-full w-full">
                     <Image
                       src={images[0]?.src ?? "/images/collage-1.png"}
                       alt={images[0]?.alt ?? "Lab image"}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
                     />
                   </div>
                 </div>
 
                 {/* Top-right (tall) */}
-                <div className="col-start-8 col-span-5 row-start-1 row-span-4 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)]">
+                <div className="col-start-8 col-span-5 row-start-1 row-span-4 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)] collage-tile collage-drift-2 hover-glow">
                   <div className="relative h-full w-full">
                     <Image
                       src={images[1]?.src ?? "/images/collage-2.png"}
                       alt={images[1]?.alt ?? "Lab image"}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
                     />
                   </div>
                 </div>
 
                 {/* Bottom-left */}
-                <div className="col-start-1 col-span-5 row-start-5 row-span-3 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)]">
+                <div className="col-start-1 col-span-5 row-start-5 row-span-3 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)] collage-tile collage-drift-3 hover-glow">
                   <div className="relative h-full w-full">
                     <Image
                       src={images[2]?.src ?? "/images/collage-3.png"}
                       alt={images[2]?.alt ?? "Lab image"}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
                     />
                   </div>
                 </div>
 
                 {/* Bottom-middle (slightly lower) */}
-                <div className="col-start-6 col-span-4 row-start-6 row-span-3 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)] translate-y-3 sm:translate-y-4">
+                <div className="col-start-6 col-span-4 row-start-6 row-span-3 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)] translate-y-3 sm:translate-y-4 collage-tile collage-drift-4 hover-glow">
                   <div className="relative h-full w-full">
                     <Image
                       src={images[3]?.src ?? "/images/collage-4.png"}
                       alt={images[3]?.alt ?? "Lab image"}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
                     />
                   </div>
                 </div>
 
                 {/* Bottom-right */}
-                <div className="col-start-10 col-span-6 row-start-5 row-span-4 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)]">
+                <div className="col-start-10 col-span-6 row-start-5 row-span-4 overflow-hidden rounded-[18px] shadow-[0_16px_50px_rgba(0,0,0,0.18)] collage-tile collage-drift-5 hover-glow">
                   <div className="relative h-full w-full">
                     <Image
                       src={images[4]?.src ?? "/images/collage-5.png"}
                       alt={images[4]?.alt ?? "Lab image"}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-[1.04]"
                     />
                   </div>
                 </div>

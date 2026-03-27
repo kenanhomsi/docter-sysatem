@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import "./styles/motion";
+
 @custom-variant theme-light (html[data-theme="light"] &);
 
 :root {
@@ -81,6 +83,55 @@ body {
   min-height: 100dvh;
 }
 
+.bg-logo-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: calc(var(--bg-logo-opacity, 1) * 0.12);
+  transition: opacity 380ms ease;
+}
+
+/* Soft vignette to blend watermark across themes */
+.bg-logo-layer__inner {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1000px 520px at 50% 35%, rgba(0, 156, 194, 0.10), transparent 60%),
+    radial-gradient(820px 520px at 55% 55%, rgba(255, 215, 0, 0.06), transparent 55%);
+  opacity: 0.9;
+}
+
+.bg-logo-layer__mark {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(76vmin, 860px);
+  height: min(76vmin, 860px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: saturate(0) contrast(1.05);
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+}
+
+html[data-theme="light"] .bg-logo-layer {
+  opacity: calc(var(--bg-logo-opacity, 1) * 0.08);
+}
+
+html[data-theme="light"] .bg-logo-layer__mark {
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+}
+
+/* Make sure app content stays above the background watermark */
+body > *:not(.bg-logo-layer) {
+  position: relative;
+  z-index: 1;
+}
+
 /* Overlap adjacent sections to remove visible breaks/lines. */
 .section-overlap > section + section {
   margin-top: 60px;
@@ -121,8 +172,12 @@ a {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes floatSlow {
@@ -148,7 +203,11 @@ a {
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--border-0);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
 }
 
 .branch-map__container {
@@ -161,7 +220,11 @@ a {
   inset: 0;
   display: grid;
   place-items: center;
-  background: radial-gradient(700px 220px at 40% 20%, rgba(0, 156, 194, 0.18), transparent 60%);
+  background: radial-gradient(
+    700px 220px at 40% 20%,
+    rgba(0, 156, 194, 0.18),
+    transparent 60%
+  );
 }
 
 .branch-map__shimmer {
@@ -201,3 +264,4 @@ a {
     background-position: -20% 0;
   }
 }
+

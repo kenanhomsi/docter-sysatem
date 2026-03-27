@@ -12,11 +12,10 @@ import { Services } from "@/components/Services";
 import { StackedImagesSection } from "@/components/StackedImagesSection";
 import { TopBar } from "@/components/TopBar";
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 
 export default async function Home() {
   const t = await getTranslations();
-
-
 
   return (
     <div className="flex flex-1 flex-col">
@@ -24,17 +23,33 @@ export default async function Home() {
       <TopBar />
       <Navbar />
       <main className="flex-1 section-overlap">
-        <Hero />
-        <IsoBanner />
-        <About />
-        <StackedImagesSection />
-        <MissionCards />
-        <Services />
-        <News />
-        <Branches />
-        <section id="results" className="relative">
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <Hero />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section style={{ "--reveal-delay": "60ms" } as CSSProperties}>
+          <IsoBanner />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section style={{ "--reveal-delay": "90ms" } as CSSProperties}>
+          <About />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <StackedImagesSection />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <MissionCards />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <Services />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <News />
+        </section>
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <Branches />
+        </section>
+        <section id="results" className="relative" data-reveal="zoom" data-bg-logo-section>
           <div className="mx-auto max-w-6xl px-6 py-18 lg:py-24">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-10 text-center shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur">
+            <div className="rounded-[28px] border border-white/10 bg-white/5 p-10 text-center shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur hover-lift hover-glow chem-hover">
               <div className="text-xs font-semibold tracking-[0.24em] text-brand-primary">
                 {t("home.results.kicker")}
               </div>
@@ -46,14 +61,16 @@ export default async function Home() {
               </p>
               <a
                 href="#contact"
-                className="mt-7 inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_60px_rgba(0,156,194,0.35)] transition hover:brightness-110 focus:outline-none focus-visible:[box-shadow:var(--ring-primary)]"
+                className="mt-7 inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_60px_rgba(0,156,194,0.35)] transition hover:brightness-110 focus:outline-none focus-visible:[box-shadow:var(--ring-primary)] hover-lift"
               >
                 {t("home.results.cta")}
               </a>
             </div>
           </div>
         </section>
-        <Contact />
+        <section data-reveal="fade-up" data-bg-logo-section>
+          <Contact />
+        </section>
       </main>
       <Footer />
     </div>

@@ -1,0 +1,808 @@
+/* Scroll reveal system
+   - Add `data-reveal` to any element.
+   - Optional: data-reveal="fade" | "fade-up" | "slide-left" | "slide-right" | "zoom"
+   - Optional: style={{ "--reveal-delay": "120ms" }} (also works in plain HTML)
+*/
+
+:root {
+  --reveal-duration: 720ms;
+  --reveal-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --reveal-y: 18px;
+  --reveal-x: 22px;
+  --reveal-blur: 10px;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y), 0);
+  filter: blur(var(--reveal-blur));
+  transition:
+    transform var(--reveal-duration) var(--reveal-ease),
+    opacity calc(var(--reveal-duration) * 0.85) var(--reveal-ease),
+    filter var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="fade"] {
+  transform: none;
+  filter: none;
+}
+
+[data-reveal="fade-up"] {
+  transform: translate3d(0, var(--reveal-y), 0);
+}
+
+[data-reveal="slide-left"] {
+  transform: translate3d(var(--reveal-x), 0, 0);
+}
+
+[data-reveal="slide-right"] {
+  transform: translate3d(calc(var(--reveal-x) * -1), 0, 0);
+}
+
+[data-reveal="zoom"] {
+  transform: translate3d(0, var(--reveal-y), 0) scale(0.97);
+}
+
+.is-revealed[data-reveal],
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Hover motion utilities (native CSS, works with Tailwind classes) */
+.hover-lift {
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translate3d(0, -6px, 0);
+  filter: brightness(1.03);
+}
+
+.hover-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.hover-glow::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    650px 220px at 50% 0%,
+    rgba(0, 156, 194, 0.22),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 260ms ease;
+  z-index: -1;
+}
+
+.hover-glow:hover::after {
+  opacity: 1;
+}
+
+/* Collage tiles: subtle, always-on motion + hover tilt */
+@keyframes driftY {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes driftX {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(10px, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes driftXY {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    transform: translate3d(8px, -8px, 0);
+  }
+  66% {
+    transform: translate3d(-6px, -4px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.collage-stage {
+  perspective: 900px;
+}
+
+.collage-tile {
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  transition:
+    transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.collage-tile:hover {
+  transform: translate3d(0, -6px, 0) rotateX(2deg) rotateY(-2deg);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.collage-drift-1 {
+  animation: driftY 8.5s ease-in-out infinite;
+}
+.collage-drift-2 {
+  animation: driftXY 10.5s ease-in-out infinite;
+}
+.collage-drift-3 {
+  animation: driftX 9.5s ease-in-out infinite;
+}
+.collage-drift-4 {
+  animation: driftXY 12s ease-in-out infinite reverse;
+}
+.collage-drift-5 {
+  animation: driftY 11s ease-in-out infinite reverse;
+}
+
+/* Atomic orbital (Hero) */
+@keyframes orbitalRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitalBreath {
+  0% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.018);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+}
+
+.orbital {
+  position: relative;
+  isolation: isolate;
+}
+
+.orbital-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+.orbital-ring--outer {
+  animation: orbitalBreath 7.5s ease-in-out infinite;
+}
+
+.orbital-ring--dash {
+  animation: orbitalRotate 26s linear infinite;
+}
+
+.orbital-ring--mid {
+  animation: orbitalRotate 20s linear infinite reverse;
+}
+
+.orbital-orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  animation: orbitalRotate 8.5s linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.orbital-orbit--slow {
+  animation-duration: 12.5s;
+}
+
+.orbital-electron {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  height: 8px;
+  width: 8px;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: #009cc2;
+  box-shadow:
+    0 0 10px #009cc2,
+    0 0 20px #009cc2;
+}
+
+.orbital-electron::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(0, 156, 194, 0.25), transparent 62%);
+  filter: blur(2px);
+  opacity: 0.85;
+}
+
+/* Chemical reaction layer (Hero) */
+@keyframes reactionSwirl {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.02);
+    filter: hue-rotate(18deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes bubbleRise {
+  0% {
+    transform: translate3d(0, 18px, 0) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  70% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(0, -150px, 0) scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkFlicker {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: rotate(360deg) translate3d(0, 0, 0);
+    opacity: 0.15;
+  }
+}
+
+.reaction-field {
+  position: absolute;
+  inset: 18%;
+  border-radius: 9999px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from 90deg,
+      rgba(0, 156, 194, 0.0),
+      rgba(0, 156, 194, 0.18),
+      rgba(255, 215, 0, 0.10),
+      rgba(0, 156, 194, 0.0)
+    );
+  mix-blend-mode: screen;
+  filter: blur(10px) saturate(1.25);
+  animation: reactionSwirl 9.5s linear infinite;
+}
+
+.reaction-field::before {
+  content: "";
+  position: absolute;
+  inset: -14%;
+  border-radius: inherit;
+  background: radial-gradient(
+    180px 120px at 40% 45%,
+    rgba(0, 156, 194, 0.26),
+    transparent 70%
+  );
+  filter: blur(12px);
+  opacity: 0.85;
+}
+
+.reaction-bubbles {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at 50% 50%, #000 55%, transparent 70%);
+}
+
+.reaction-bubble {
+  position: absolute;
+  bottom: 18%;
+  left: var(--x, 50%);
+  width: var(--s, 10px);
+  height: var(--s, 10px);
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.75), rgba(0, 156, 194, 0.22) 45%, transparent 70%);
+  border: 1px solid rgba(0, 156, 194, 0.18);
+  box-shadow: 0 0 18px rgba(0, 156, 194, 0.14);
+  filter: blur(0.2px);
+  animation: bubbleRise var(--d, 4.2s) ease-in infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.reaction-sparks {
+  position: absolute;
+  inset: 10%;
+  border-radius: 9999px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(2px 2px at 20% 35%, rgba(255, 215, 0, 0.55), transparent 70%),
+    radial-gradient(2px 2px at 65% 25%, rgba(0, 156, 194, 0.55), transparent 70%),
+    radial-gradient(2px 2px at 70% 70%, rgba(255, 255, 255, 0.40), transparent 70%),
+    radial-gradient(2px 2px at 35% 75%, rgba(0, 156, 194, 0.45), transparent 70%);
+  filter: blur(0.2px);
+  animation: sparkFlicker 6.5s linear infinite;
+  opacity: 0.75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reaction-field,
+  .reaction-bubble,
+  .reaction-sparks {
+    animation: none !important;
+  }
+}
+
+/* "Chemist station" hover: flask + micro-reaction (pure CSS/SVG) */
+.chem-hover {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.chem-hover::before {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: -14px;
+  width: clamp(90px, 26%, 140px);
+  aspect-ratio: 1 / 1;
+  opacity: 0;
+  transform: translate3d(14px, 14px, 0) rotate(-8deg) scale(0.96);
+  transition:
+    opacity 220ms ease,
+    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: saturate(1.1) contrast(1.02);
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom right;
+  /* inline SVG "flask" */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='25%25' r='75%25'%3E%3Cstop offset='0' stop-color='%23ffffff' stop-opacity='.95'/%3E%3Cstop offset='.38' stop-color='%23009cc2' stop-opacity='.22'/%3E%3Cstop offset='1' stop-color='%23009cc2' stop-opacity='0'/%3E%3C/radialGradient%3E%3ClinearGradient id='l' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%23009cc2' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23ffd700' stop-opacity='.20'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='86' cy='26' r='18' fill='url(%23g)'/%3E%3Cpath d='M56 10h28v10l-8 12v24l28 46c6 10-1 23-13 23H49c-12 0-19-13-13-23l28-46V42l-8-12V10z' fill='rgba(255,255,255,0.18)' stroke='rgba(255,255,255,0.55)' stroke-width='2'/%3E%3Cpath d='M52 94h48l9 16c3 6-1 13-8 13H39c-7 0-11-7-8-13l9-16z' fill='url(%23l)' opacity='.95'/%3E%3Cpath d='M60 28h20' stroke='rgba(255,255,255,0.5)' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M64 58h12' stroke='rgba(255,255,255,0.35)' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.chem-hover::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity 220ms ease,
+    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(260px 160px at 80% 78%, rgba(0, 156, 194, 0.22), transparent 60%),
+    radial-gradient(220px 160px at 84% 72%, rgba(255, 215, 0, 0.12), transparent 62%),
+    radial-gradient(2px 2px at 82% 68%, rgba(255, 215, 0, 0.65), transparent 70%),
+    radial-gradient(2px 2px at 74% 76%, rgba(0, 156, 194, 0.55), transparent 70%),
+    radial-gradient(2px 2px at 88% 82%, rgba(255, 255, 255, 0.40), transparent 70%);
+  filter: blur(0.2px);
+  animation: sparkFlicker 5.4s linear infinite;
+}
+
+.chem-hover:hover::before {
+  opacity: 0.9;
+  transform: translate3d(0, 0, 0) rotate(-4deg) scale(1);
+}
+
+.chem-hover:hover::after {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.chem-hover > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chem-hover::after {
+    animation: none !important;
+  }
+}
+
+/* Medical hover (Hero orb): scanner sweep + ECG trace */
+@keyframes scanSweep {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  70% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ecgDraw {
+  from {
+    stroke-dashoffset: 320;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.95;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+.med-hover {
+  cursor: default;
+}
+
+.med-hover::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0 260deg,
+      rgba(0, 156, 194, 0.0) 260deg,
+      rgba(0, 156, 194, 0.45) 292deg,
+      rgba(255, 215, 0, 0.18) 312deg,
+      rgba(0, 156, 194, 0.0) 330deg,
+      transparent 360deg
+    );
+  filter: blur(1.2px);
+  mix-blend-mode: screen;
+  transform-origin: 50% 50%;
+}
+
+.med-hover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(340px, 78%);
+  height: 56px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* inline SVG ECG trace (stroke animated via dasharray in SVG) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 56'%3E%3Cpath d='M0 30H70l14-12 12 26 14-34 12 40 14-20h48l12-10 12 20 12-16 12 14H360' fill='none' stroke='rgba(0,156,194,0.95)' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='320' stroke-dashoffset='320'/%3E%3C/svg%3E");
+  filter: drop-shadow(0 0 14px rgba(0, 156, 194, 0.35));
+  mask-image: radial-gradient(220px 50px at 50% 50%, #000 60%, transparent 100%);
+}
+
+.med-hover:hover::before {
+  animation: scanSweep 1.35s linear 1;
+}
+
+.med-hover:hover::after {
+  animation: ecgDraw 1.35s ease-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-hover:hover::before,
+  .med-hover:hover::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* Analytical laboratory HUD */
+@keyframes hudReticle {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hudScan {
+  0% {
+    transform: translate3d(0, 24px, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  55% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(0, -220px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes hudReadoutIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.med-hover {
+  /* “instrument glass” feel on hover */
+  transition: filter 220ms ease;
+}
+
+.med-hover:hover {
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.lab-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.lab-hud__reticle {
+  position: absolute;
+  inset: 8%;
+  border-radius: 9999px;
+  opacity: 0;
+  transform: rotate(0deg);
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0, 156, 194, 0.10), transparent 55%),
+    radial-gradient(circle at 50% 50%, transparent 58%, rgba(0, 156, 194, 0.18) 59%, transparent 61%),
+    radial-gradient(circle at 50% 50%, transparent 72%, rgba(0, 156, 194, 0.14) 73%, transparent 75%),
+    conic-gradient(
+      from 0deg,
+      rgba(0, 156, 194, 0.00),
+      rgba(0, 156, 194, 0.25),
+      rgba(0, 156, 194, 0.00),
+      rgba(255, 215, 0, 0.10),
+      rgba(0, 156, 194, 0.00)
+    );
+  filter: blur(0.6px);
+  mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 74%);
+}
+
+.lab-hud__reticle::before,
+.lab-hud__reticle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent 49.6%, rgba(0, 156, 194, 0.22) 50%, transparent 50.4%),
+    linear-gradient(0deg, transparent 49.6%, rgba(0, 156, 194, 0.22) 50%, transparent 50.4%);
+  opacity: 0.9;
+}
+
+.lab-hud__reticle::after {
+  inset: 12%;
+  opacity: 0.55;
+}
+
+.lab-hud__scanline {
+  position: absolute;
+  left: 50%;
+  top: 24%;
+  width: min(380px, 86%);
+  height: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 156, 194, 0.75),
+    rgba(255, 255, 255, 0.35),
+    rgba(0, 156, 194, 0.75),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(0, 156, 194, 0.25);
+}
+
+.lab-hud__scanline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -18px;
+  width: 100%;
+  height: 38px;
+  background: linear-gradient(180deg, rgba(0, 156, 194, 0.12), transparent);
+  filter: blur(0.2px);
+}
+
+.lab-hud__readout {
+  position: absolute;
+  opacity: 0;
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 156, 194, 0.20);
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.lab-hud__k {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(0, 156, 194, 0.85);
+}
+
+.lab-hud__v {
+  margin-top: 3px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.lab-hud__readout--tl {
+  top: 12%;
+  left: 10%;
+}
+.lab-hud__readout--tr {
+  top: 12%;
+  right: 10%;
+}
+.lab-hud__readout--bl {
+  bottom: 24%;
+  left: 10%;
+}
+.lab-hud__readout--br {
+  bottom: 24%;
+  right: 10%;
+}
+
+/* Trigger on hover: replace ECG vibe with lab instrument vibe */
+.med-hover:hover::before,
+.med-hover:hover::after {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+.med-hover:hover .lab-hud__reticle {
+  opacity: 1;
+  animation: hudReticle 3.8s linear infinite;
+}
+
+.med-hover:hover .lab-hud__scanline {
+  animation: hudScan 1.25s ease-out 1;
+}
+
+.med-hover:hover .lab-hud__readout {
+  animation: hudReadoutIn 220ms ease-out 1 forwards;
+}
+
+.med-hover:hover .lab-hud__readout--tr {
+  animation-delay: 40ms;
+}
+.med-hover:hover .lab-hud__readout--bl {
+  animation-delay: 80ms;
+}
+.med-hover:hover .lab-hud__readout--br {
+  animation-delay: 120ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .med-hover:hover .lab-hud__reticle,
+  .med-hover:hover .lab-hud__scanline,
+  .med-hover:hover .lab-hud__readout {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* Hero background video */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  opacity: 0.42;
+  filter: saturate(1.05) contrast(1.05);
+  pointer-events: none;
+}
+
+.hero-video__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 70% 30%, rgba(0, 156, 194, 0.20), transparent 55%),
+    radial-gradient(900px 520px at 25% 25%, rgba(255, 215, 0, 0.10), transparent 60%),
+    linear-gradient(180deg, rgba(5, 9, 20, 0.78), rgba(5, 9, 20, 0.66));
+}
+
+/* Light mode: brighter, cleaner video; lighter scrim */
+html[data-theme="light"] .hero-video {
+  opacity: 0.62;
+  filter: saturate(1.08) contrast(1.08) brightness(1.02);
+}
+
+html[data-theme="light"] .hero-video__scrim {
+  background:
+    radial-gradient(900px 520px at 70% 30%, rgba(0, 156, 194, 0.16), transparent 55%),
+    radial-gradient(900px 520px at 25% 25%, rgba(255, 215, 0, 0.10), transparent 60%),
+    linear-gradient(180deg, rgba(246, 251, 255, 0.55), rgba(238, 246, 251, 0.70));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+  .hero-video__scrim {
+    background: linear-gradient(180deg, rgba(5, 9, 20, 0.88), rgba(5, 9, 20, 0.72));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="light"] .hero-video__scrim {
+    background: linear-gradient(180deg, rgba(246, 251, 255, 0.68), rgba(238, 246, 251, 0.78));
+  }
+}
+
